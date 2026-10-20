@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فن التعامل واكتساب الأخلاق | The Art of Dealing with People</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cairo & Tajawal for Arabic, Plus Jakarta Sans for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        arabic: ['Cairo', 'sans-serif'],
+                        english: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        accent: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            transition: background-color 0.35s ease, color 0.35s ease;
+        }
+        html[dir="rtl"] body {
+            font-family: 'Cairo', sans-serif;
+        }
+        html[dir="ltr"] body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Custom Range Slider */
+        input[type=range].balance-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #3b82f6 0%, #10b981 50%, #ef4444 100%);
+            outline: none;
+        }
+        input[type=range].balance-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #10b981;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        input[type=range].balance-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        /* Glassmorphism utilities */
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Smooth animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.5);
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white overflow-x-hidden">
+
+    <!-- Confetti Canvas for Celebrations -->
+    <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50 hidden"></canvas>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/85 dark:bg-slate-900/85 glass-card border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+            <!-- Brand Logo & Title -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-brand-500 to-teal-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/25 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-handshake-angle text-xl"></i>
+                </div>
+                <div>
+                    <span id="nav-title" class="font-bold text-lg sm:text-xl tracking-tight block text-slate-900 dark:text-white">فن التعامل واكتساب الأخلاق</span>
+                    <span id="nav-subtitle" class="text-xs text-brand-600 dark:text-brand-400 font-medium block">Abouawd Studio • رحلة تفاعلية</span>
+                </div>
+            </a>
+
+            <!-- Desktop Quick Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold">
+                <a href="#journey" data-i18n="nav_journey" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">رحلة الفيديو</a>
+                <a href="#personalities" data-i18n="nav_personalities" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">أنماط البشر</a>
+                <a href="#balance" data-i18n="nav_balance" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">معادلة التوازن</a>
+                <a href="#skills" data-i18n="nav_skills" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">المهارات الأربع</a>
+                <a href="#simulator" data-i18n="nav_simulator" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">فلتر الكلمات</a>
+                <a href="#assessment" data-i18n="nav_assessment" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">اختبار الذات</a>
+                <a href="#tracker" data-i18n="nav_tracker" class="px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 transition">التدريب اليومي</a>
+            </nav>
+
+            <!-- Action Controls: Language Toggle & Dark Mode Toggle -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Language Switcher -->
+                <button id="lang-toggle" onclick="toggleLanguage()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-sm border border-slate-200/80 dark:border-slate-700 transition-all shadow-sm" title="Switch Language / تغيير اللغة">
+                    <i class="fa-solid fa-earth-americas text-brand-500"></i>
+                    <span id="lang-btn-text">English</span>
+                </button>
+
+                <!-- Theme Switcher -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-amber-400 flex items-center justify-center border border-slate-200/80 dark:border-slate-700 transition-all shadow-sm" title="Toggle Dark Mode / الوضع الليلي">
+                    <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+
+        <!-- ================= HERO SECTION ================= -->
+        <section id="hero" class="relative py-12 sm:py-20 overflow-hidden">
+            <!-- Background decorative blobs -->
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-brand-500/10 dark:bg-brand-500/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-500/10 dark:bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Hero Text Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex flex-wrap items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 dark:bg-brand-950/80 border border-brand-200 dark:border-brand-800 text-brand-700 dark:text-brand-300 text-xs sm:text-sm font-bold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                            <span data-i18n="hero_badge">قناة Abouawd Studio • خلاصة كتاب «فن التعامل واكتساب الأخلاق»</span>
+                        </div>
+
+                        <h1 data-i18n="hero_title" class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+                            لماذا تنجح علاقات البعض وتفشل أخرى؟
+                        </h1>
+
+                        <p data-i18n="hero_desc" class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+                            هل سألت نفسك يوماً: لماذا هناك أشخاص يدخلون القلوب بلا استئذان وتنجح علاقاتهم، بينما يعاني آخرون رغم طيبة قلوبهم؟ السر ليس في الحظ، بل في «فن التعامل» بوصفه مهارة تُكتسب بالتدريب والوعي اليومي.
+                        </p>
+
+                        <!-- Core Golden Quote Card [00:04:19] -->
+                        <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-amber-50/90 via-white to-emerald-50/90 dark:from-slate-900 dark:via-slate-900/90 dark:to-emerald-950/40 border border-amber-200/80 dark:border-emerald-800/60 shadow-md relative overflow-hidden">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-500/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-2xl">
+                                    <i class="fa-solid fa-quote-right"></i>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center gap-2">
+                                        <span data-i18n="quote_label" class="text-xs font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400">القاعدة الذهبية في الفيديو</span>
+                                        <button onclick="seekVideo(259)" class="text-xs px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-700 dark:text-amber-300 font-mono hover:bg-amber-500/30 transition">
+                                            <i class="fa-solid fa-play text-[10px] mx-0.5"></i> 00:04:19
+                                        </button>
+                                    </div>
+                                    <p data-i18n="hero_quote" class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white leading-snug">
+                                        «الناس لا يتذكرون كلامك، بل يتذكرون شعورهم وهم معك»
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <a href="#simulator" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-500 hover:to-teal-500 text-white font-bold shadow-lg shadow-brand-500/25 flex items-center gap-2.5 transition transform hover:-translate-y-0.5">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span data-i18n="cta_simulator">جرب محاكي «فلتر الكلمات»</span>
+                            </a>
+                            <a href="https://youtu.be/LUMg5dvfljM?si=s0g9w-XnJazzX9l3" target="_blank" rel="noopener noreferrer" class="px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 font-bold border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-2.5 transition">
+                                <i class="fa-brands fa-youtube text-red-500 text-xl"></i>
+                                <span data-i18n="cta_watch_yt">مشاهدة على يوتيوب</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Hero Video & Interactive Card Column -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800 shadow-2xl space-y-4">
+                            <!-- Embedded Video Container -->
+                            <div class="relative rounded-2xl overflow-hidden aspect-video bg-slate-950 shadow-inner group">
+                                <iframe id="yt-iframe" class="w-full h-full" src="https://www.youtube.com/embed/LUMg5dvfljM?rel=0" title="لماذا تنجح علاقات البعض وتفشل أخرى؟" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+
+                            <!-- Video Quick Info & Interactive Chapter Pills -->
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
+                                    <span class="flex items-center gap-1.5">
+                                        <i class="fa-solid fa-clock text-brand-500"></i>
+                                        <span data-i18n="video_chapters_title">انتقل مباشرة إلى محطات الفيديو:</span>
+                                    </span>
+                                    <span class="font-mono bg-slate-100 dark:bg-slate-800 px-2.5 py-1 rounded-lg text-slate-700 dark:text-slate-300">05:09</span>
+                                </div>
+
+                                <div class="flex flex-wrap gap-1.5">
+                                    <button onclick="seekVideo(0)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">00:00</span>
+                                        <span data-i18n="chap_1">السؤال الجوهري</span>
+                                    </button>
+                                    <button onclick="seekVideo(50)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">00:50</span>
+                                        <span data-i18n="chap_2">الأخلاق مهارة</span>
+                                    </button>
+                                    <button onclick="seekVideo(70)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">01:10</span>
+                                        <span data-i18n="chap_3">الحساس والعملي</span>
+                                    </button>
+                                    <button onclick="seekVideo(112)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">01:52</span>
+                                        <span data-i18n="chap_4">معادلة التوازن</span>
+                                    </button>
+                                    <button onclick="seekVideo(147)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">02:27</span>
+                                        <span data-i18n="chap_5">المهارات الأربع</span>
+                                    </button>
+                                    <button onclick="seekVideo(278)" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-brand-500 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1">
+                                        <span class="font-mono opacity-75">04:38</span>
+                                        <span data-i18n="chap_6">فلتر الكلمات</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TIMELINE / VIDEO JOURNEY SECTION ================= -->
+        <section id="journey" class="py-14 bg-white dark:bg-slate-900/60 border-y border-slate-200/70 dark:border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span data-i18n="journey_badge" class="px-3.5 py-1 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-wider">خارطة المفاهيم الزمنية</span>
+                    <h2 data-i18n="journey_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">المرتكزات الأساسية لكتاب «فن التعامل واكتساب الأخلاق»</h2>
+                    <p data-i18n="journey_sub" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">اضغط على أي محطة زمنية لاستكشاف الفكرة الجوهرية وتشغيل المقطع المقابل في الفيديو</p>
+                </div>
+
+                <!-- Interactive Pillars Grid -->
+                <div id="timeline-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Populated dynamically via JS for seamless bilingual updates -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SOCIAL FLEXIBILITY: SENSITIVE VS PRACTICAL [00:01:10] ================= -->
+        <section id="personalities" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-3 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/70 px-3.5 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-800">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                            <span data-i18n="pers_badge">المرونة الاجتماعية • الدقيقة [00:01:10]</span>
+                        </div>
+                        <h2 data-i18n="pers_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">الناس ليسوا متشابهين: كيف تكسب كل شخصية؟</h2>
+                        <p data-i18n="pers_desc" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                            من أكبر أخطاء العلاقات التعامل مع الجميع بقالب واحد. الشخص الذكي أخلاقياً واجتماعياً يقرأ مفتاح الشخصية التي أمامه بمرونة دون نفاق.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Switcher Buttons -->
+                    <div class="inline-flex p-1.5 rounded-2xl bg-slate-200/80 dark:bg-slate-800 self-start">
+                        <button id="btn-pers-sensitive" onclick="selectPersonality('sensitive')" class="px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 shadow-sm">
+                            <i class="fa-solid fa-heart"></i>
+                            <span data-i18n="pers_btn_sensitive">الشخص الحساس</span>
+                        </button>
+                        <button id="btn-pers-practical" onclick="selectPersonality('practical')" class="px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <span data-i18n="pers_btn_practical">الشخص العملي</span>
+                        </button>
+                        <button id="btn-pers-both" onclick="selectPersonality('both')" class="px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                            <i class="fa-solid fa-table-columns"></i>
+                            <span data-i18n="pers_btn_both">مقارنة شاملة</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dynamic Personality Comparison View -->
+                <div id="personality-display" class="grid grid-cols-1 gap-8">
+                    <!-- Rendered via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= THE BALANCE EQUATION [00:01:52] ================= -->
+        <section id="balance" class="py-16 bg-gradient-to-b from-slate-100/80 to-white dark:from-slate-900/90 dark:to-slate-950 border-y border-slate-200/80 dark:border-slate-800">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center space-y-3">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950 px-3.5 py-1.5 rounded-full border border-brand-200 dark:border-brand-800">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        <span data-i18n="bal_badge">معادلة الأخلاق الحقيقية • الدقيقة [00:01:52]</span>
+                    </div>
+                    <h2 data-i18n="bal_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">الأخلاق = التوازن (لا ضعف ولا قسوة)</h2>
+                    <p data-i18n="bal_desc" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
+                        حرك المؤشر التفاعلي أدناه لترى الفرق بين الطيبة العمياء التي تُفقدك حقوقك، والقسوة التي تُفقدك القلوب، ومنطقة التوازن الذهبي (لين + حزم).
+                    </p>
+                </div>
+
+                <!-- Balance Interactive Card -->
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-xl space-y-8">
+                    
+                    <!-- Visual Seesaw / Scale SVG -->
+                    <div class="flex flex-col items-center justify-center py-2">
+                        <svg id="balance-svg" viewBox="0 0 400 130" class="w-full max-w-md h-32 overflow-visible">
+                            <!-- Base Triangle -->
+                            <polygon points="200,75 180,120 220,120" class="fill-slate-300 dark:fill-slate-700" />
+                            <rect x="150" y="120" width="100" height="8" rx="4" class="fill-slate-400 dark:fill-slate-600" />
+                            
+                            <!-- Tilting Beam Group -->
+                            <g id="scale-beam" transform="rotate(0, 200, 75)" style="transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                                <rect x="40" y="70" width="320" height="10" rx="5" class="fill-brand-500" />
+                                <!-- Left Weight (Kindness/Sensitivity) -->
+                                <circle cx="65" cy="52" r="20" class="fill-blue-500/90" />
+                                <text x="65" y="57" text-anchor="middle" fill="white" font-size="11" font-weight="bold" id="svg-left-txt">لين</text>
+                                <!-- Right Weight (Firmness/Boundaries) -->
+                                <circle cx="335" cy="52" r="20" class="fill-rose-500/90" />
+                                <text x="335" y="57" text-anchor="middle" fill="white" font-size="11" font-weight="bold" id="svg-right-txt">حزم</text>
+                                <!-- Center Pivot -->
+                                <circle cx="200" cy="75" r="8" class="fill-white stroke-brand-600 stroke-4" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Slider Control -->
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-xs sm:text-sm font-bold">
+                            <span class="text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-feather"></i>
+                                <span data-i18n="bal_pole_left">طيبة عمياء / ضعف (0%)</span>
+                            </span>
+                            <span class="text-brand-600 dark:text-brand-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-star"></i>
+                                <span data-i18n="bal_pole_center">التوازن الذهبي (50%)</span>
+                            </span>
+                            <span class="text-red-600 dark:text-red-400 flex items-center gap-1.5">
+                                <span data-i18n="bal_pole_right">قسوة مفرطة / فظاظة (100%)</span>
+                                <i class="fa-solid fa-gavel"></i>
+                            </span>
+                        </div>
+
+                        <input id="balance-input" type="range" min="0" max="100" value="50" class="balance-slider" oninput="updateBalance(this.value)">
+
+                        <div class="flex justify-center gap-2 pt-2">
+                            <button onclick="setBalancePreset(15)" data-i18n="bal_preset_weak" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition">اختبر حالة الضعف</button>
+                            <button onclick="setBalancePreset(50)" data-i18n="bal_preset_ideal" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800 hover:bg-brand-100 transition">العودة للتوازن المثالي</button>
+                            <button onclick="setBalancePreset(85)" data-i18n="bal_preset_harsh" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800 hover:bg-red-100 transition">اختبر حالة القسوة</button>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Analysis Box -->
+                    <div id="balance-feedback" class="p-6 rounded-2xl border transition-all duration-300">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= THE 4 CRUCIAL SKILLS [00:02:27] ================= -->
+        <section id="skills" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span data-i18n="skills_badge" class="px-3.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-xs font-bold uppercase tracking-wider">الأركان الأربعة • الدقيقة [00:02:27]</span>
+                    <h2 data-i18n="skills_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">المهارات الأربع الحاسمة في فن التعامل</h2>
+                    <p data-i18n="skills_desc" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        يلخص الفيديو أربع مهارات عملية تصنع الفارق بين علاقة ناجحة تزداد مودة، وعلاقة تنهار بسبب تفاصيل يومية صغيرة.
+                    </p>
+                </div>
+
+                <!-- 4 Skills Interactive Grid -->
+                <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Rendered dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= WORD FILTER SIMULATOR [00:04:38] ================= -->
+        <section id="simulator" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.18),transparent_60%)] pointer-events-none"></div>
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative space-y-10">
+                
+                <div class="text-center space-y-3 max-w-3xl mx-auto">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-300 text-xs font-bold">
+                        <i class="fa-solid fa-filter"></i>
+                        <span data-i18n="sim_badge">محاكي المواقف الواقعية • الدقيقة [00:04:38]</span>
+                    </div>
+                    <h2 data-i18n="sim_title" class="text-2xl sm:text-4xl font-extrabold">فلتر الكلمات: «هل هذه الكلمة ستقربنا أم ستبعدنا؟»</h2>
+                    <p data-i18n="sim_desc" class="text-slate-300 text-sm sm:text-base">
+                        قبل أن تنطق بأي رد في مواقف الحياة اليومية، مرّره عبر فلتر الفيديو الذهبي. اختر الموقف وجرّب الردود المختلفة لترى أثرها الفوري على القلوب.
+                    </p>
+                </div>
+
+                <!-- Scenario Tabs & Score Header -->
+                <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700 pb-5">
+                        <!-- Scenario Selector Pills -->
+                        <div id="scenario-tabs" class="flex flex-wrap gap-2">
+                            <!-- Populated via JS -->
+                        </div>
+
+                        <!-- Relationship Harmony Meter -->
+                        <div class="flex items-center gap-3 bg-slate-900/90 px-4 py-2 rounded-2xl border border-slate-700">
+                            <i class="fa-solid fa-heart-pulse text-brand-400 text-lg"></i>
+                            <div>
+                                <span data-i18n="sim_meter_label" class="text-[11px] text-slate-400 block">مؤشر تقارب القلوب</span>
+                                <span id="sim-score-display" class="text-sm font-extrabold text-brand-400">100% جاهز للاختبار</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Scenario Content -->
+                    <div id="scenario-content" class="space-y-6">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SELF-ASSESSMENT TEST [00:03:35] ================= -->
+        <section id="assessment" class="py-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span data-i18n="assess_badge" class="px-3.5 py-1 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">التقييم الذاتي • الدقيقة [00:03:35]</span>
+                    <h2 data-i18n="assess_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">اختبار مهارات فن التعامل واكتساب الأخلاق</h2>
+                    <p data-i18n="assess_desc" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        الأخلاق ليست صفة جامدة نولد بها، بل مهارة تتطور بالملاحظة والتدريب. قيّم نفسك بصدق من 1 إلى 5 في المحاور الخمسة لترى خارطة قوتك وفرص تطورك.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Questions Column -->
+                    <div id="assessment-questions" class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Result & Visual Breakdown Column -->
+                    <div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6 sticky top-24">
+                        <div class="text-center space-y-2">
+                            <h3 data-i18n="assess_result_title" class="text-lg font-extrabold text-slate-900 dark:text-white">نتيجة تقييمك الحالي</h3>
+                            <div class="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-brand-500 to-teal-600 text-white shadow-xl shadow-brand-500/25 my-2">
+                                <div>
+                                    <span id="assess-total-pct" class="text-3xl font-black block">80%</span>
+                                    <span data-i18n="assess_score_unit" class="text-[11px] uppercase tracking-wider opacity-90">الوعي الأخلاقي</span>
+                                </div>
+                            </div>
+                            <p id="assess-badge-level" class="text-base font-bold text-brand-600 dark:text-brand-400"></p>
+                        </div>
+
+                        <!-- Progress Bars per Pillar -->
+                        <div id="assess-bars" class="space-y-3">
+                            <!-- Populated via JS -->
+                        </div>
+
+                        <!-- Personalized Advice Box -->
+                        <div id="assess-advice" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DAILY PRACTICE TRACKER [00:03:51] ================= -->
+        <section id="tracker" class="py-16 bg-emerald-50/60 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="text-center space-y-3">
+                    <span data-i18n="tracker_badge" class="px-3.5 py-1 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase tracking-wider">التطبيق العملي • الدقيقة [00:03:51]</span>
+                    <h2 data-i18n="tracker_title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">متتبع التدريب اليومي على فن التعامل</h2>
+                    <p data-i18n="tracker_desc" class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        يؤكد الفيديو أن التحول الحقيقي يبدأ بتدريبات يومية بسيطة في البيت والعمل والشارع. ضع علامة صح كلما طبقت إحدى هذه الممارسات اليوم!
+                    </p>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+                    <!-- Progress Header -->
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm font-bold">
+                            <span data-i18n="tracker_progress_label" class="text-slate-700 dark:text-slate-200">مستوى إنجاز التدريب اليومي</span>
+                            <span id="tracker-progress-text" class="text-brand-600 dark:text-brand-400">0 / 5 (0%)</span>
+                        </div>
+                        <div class="w-full h-3.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div id="tracker-progress-bar" class="h-full bg-gradient-to-r from-brand-500 to-teal-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Checklist Items -->
+                    <div id="tracker-list" class="space-y-3">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Action Buttons: Reset or Copy Daily Summary -->
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <button onclick="resetTracker()" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span data-i18n="tracker_reset">إعادة ضبط اليوم</span>
+                        </button>
+
+                        <button onclick="copySummary()" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 hover:bg-brand-500 text-white shadow-md shadow-brand-500/20 transition flex items-center gap-2">
+                            <i class="fa-solid fa-share-nodes"></i>
+                            <span id="copy-btn-text" data-i18n="tracker_share">نسخ ملخص القواعد الذهبية</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER WITH MANDATORY ATTRIBUTION ================= -->
+    <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Column 1: About -->
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-brand-500 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-handshake-angle"></i>
+                        </div>
+                        <span data-i18n="footer_brand" class="font-bold text-white text-lg">فن التعامل واكتساب الأخلاق</span>
+                    </div>
+                    <p data-i18n="footer_about" class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        تطبيق ويب تفاعلي مبني على مراجعة كتاب «فن التعامل واكتساب الأخلاق» من قناة Abouawd Studio.
+                    </p>
+                </div>
+
+                <!-- Column 2: Core Quote Reminder -->
+                <div class="text-center space-y-1 bg-slate-800/70 p-4 rounded-2xl border border-slate-700/70">
+                    <p data-i18n="footer_question_label" class="text-xs text-brand-400 font-bold">سؤال قبل كل كلمة [00:04:38]</p>
+                    <p data-i18n="footer_question" class="text-sm font-bold text-white">«هل هذه الكلمة ستقربنا أم ستبعدنا؟»</p>
+                </div>
+
+                <!-- Column 3: Original Video Link -->
+                <div class="flex md:justify-end">
+                    <a href="https://youtu.be/LUMg5dvfljM?si=s0g9w-XnJazzX9l3" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-red-600/15 hover:bg-red-600/25 text-red-400 border border-red-500/30 font-bold text-sm transition">
+                        <i class="fa-brands fa-youtube text-xl"></i>
+                        <span data-i18n="footer_yt_btn">مشاهدة الفيديو الأصلي على يوتيوب</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mandatory Attribution Banner -->
+            <div class="pt-8 border-t border-slate-800/90 text-center space-y-3">
+                <div class="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-4 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-brand-950/90 via-slate-800 to-indigo-950/90 border border-brand-500/40 shadow-lg">
+                    <div class="flex items-center gap-2 text-brand-400 font-extrabold text-base sm:text-lg">
+                        <i class="fa-solid fa-award text-amber-400"></i>
+                        <span>تصميم محمد عوض خير بمساعدة Gemini 4 Argon</span>
+                    </div>
+                    <span id="footer-en-credit" class="hidden text-xs sm:text-sm text-slate-300 font-medium border-t sm:border-t-0 sm:border-l border-slate-700 pt-1 sm:pt-0 sm:pl-4">
+                        Designed by Mohamed Awad Khair with the help of Gemini 4 Argon
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Box (No alert() used) -->
+    <div id="toast-box" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm shadow-2xl border border-slate-700 dark:border-slate-200 flex items-center gap-2.5 opacity-0 pointer-events-none transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-brand-400 dark:text-brand-600 text-lg"></i>
+        <span id="toast-msg"></span>
+    </div>
+
+    <!-- ================= APPLICATION JAVASCRIPT ================= -->
+    <script>
+        // --- STATE MANAGEMENT ---
+        let currentLang = 'ar';
+        let isDark = false;
+        let currentPersonalityView = 'both'; // 'sensitive' | 'practical' | 'both'
+        let currentBalanceValue = 50;
+        let currentScenarioIndex = 0;
+        let selectedScenarioOption = null;
+        let assessmentScores = [4, 4, 4, 4, 4]; // 5 criteria out of 5
+        let trackerChecked = [false, false, false, false, false];
+
+        // --- BILINGUAL DICTIONARY ---
+        const i18n = {
+            ar: {
+                nav_title: "فن التعامل واكتساب الأخلاق",
+                nav_subtitle: "Abouawd Studio • رحلة تفاعلية",
+                nav_journey: "رحلة الفيديو",
+                nav_personalities: "أنماط البشر",
+                nav_balance: "معادلة التوازن",
+                nav_skills: "المهارات الأربع",
+                nav_simulator: "فلتر الكلمات",
+                nav_assessment: "اختبار الذات",
+                nav_tracker: "التدريب اليومي",
+                hero_badge: "قناة Abouawd Studio • خلاصة كتاب «فن التعامل واكتساب الأخلاق»",
+                hero_title: "لماذا تنجح علاقات البعض وتفشل أخرى؟",
+                hero_desc: "هل سألت نفسك يوماً: لماذا هناك أشخاص يدخلون القلوب بلا استئذان وتنجح علاقاتهم، بينما يعاني آخرون رغم طيبة قلوبهم؟ السر ليس في الحظ، بل في «فن التعامل» بوصفه مهارة تُكتسب بالتدريب والوعي اليومي.",
+                quote_label: "القاعدة الذهبية في الفيديو",
+                hero_quote: "«الناس لا يتذكرون كلامك، بل يتذكرون شعورهم وهم معك»",
+                cta_simulator: "جرب محاكي «فلتر الكلمات»",
+                cta_watch_yt: "مشاهدة على يوتيوب",
+                video_chapters_title: "انتقل مباشرة إلى محطات الفيديو:",
+                chap_1: "السؤال الجوهري",
+                chap_2: "الأخلاق مهارة",
+                chap_3: "الحساس والعملي",
+                chap_4: "معادلة التوازن",
+                chap_5: "المهارات الأربع",
+                chap_6: "فلتر الكلمات",
+                journey_badge: "خارطة المفاهيم الزمنية",
+                journey_title: "المرتكزات الأساسية لكتاب «فن التعامل واكتساب الأخلاق»",
+                journey_sub: "اضغط على أي محطة زمنية لاستكشاف الفكرة الجوهرية وتشغيل المقطع المقابل في الفيديو",
+                pers_badge: "المرونة الاجتماعية • الدقيقة [00:01:10]",
+                pers_title: "الناس ليسوا متشابهين: كيف تكسب كل شخصية؟",
+                pers_desc: "من أكبر أخطاء العلاقات التعامل مع الجميع بقالب واحد. الشخص الذكي أخلاقياً واجتماعياً يقرأ مفتاح الشخصية التي أمامه بمرونة دون نفاق.",
+                pers_btn_sensitive: "الشخص الحساس",
+                pers_btn_practical: "الشخص العملي",
+                pers_btn_both: "مقارنة شاملة",
+                bal_badge: "معادلة الأخلاق الحقيقية • الدقيقة [00:01:52]",
+                bal_title: "الأخلاق = التوازن (لا ضعف ولا قسوة)",
+                bal_desc: "حرك المؤشر التفاعلي أدناه لترى الفرق بين الطيبة العمياء التي تُفقدك حقوقك، والقسوة التي تُفقدك القلوب، ومنطقة التوازن الذهبي (لين + حزم).",
+                bal_pole_left: "طيبة عمياء / ضعف (0%)",
+                bal_pole_center: "التوازن الذهبي (50%)",
+                bal_pole_right: "قسوة مفرطة / فظاظة (100%)",
+                bal_preset_weak: "اختبر حالة الضعف",
+                bal_preset_ideal: "العودة للتوازن المثالي",
+                bal_preset_harsh: "اختبر حالة القسوة",
+                skills_badge: "الأركان الأربعة • الدقيقة [00:02:27]",
+                skills_title: "المهارات الأربع الحاسمة في فن التعامل",
+                skills_desc: "يلخص الفيديو أربع مهارات عملية تصنع الفارق بين علاقة ناجحة تزداد مودة، وعلاقة تنهار بسبب تفاصيل يومية صغيرة.",
+                sim_badge: "محاكي المواقف الواقعية • الدقيقة [00:04:38]",
+                sim_title: "فلتر الكلمات: «هل هذه الكلمة ستقربنا أم ستبعدنا؟»",
+                sim_desc: "قبل أن تنطق بأي رد في مواقف الحياة اليومية، مرّره عبر فلتر الفيديو الذهبي. اختر الموقف وجرّب الردود المختلفة لترى أثرها الفوري على القلوب.",
+                sim_meter_label: "مؤشر تقارب القلوب",
+                assess_badge: "التقييم الذاتي • الدقيقة [00:03:35]",
+                assess_title: "اختبار مهارات فن التعامل واكتساب الأخلاق",
+                assess_desc: "الأخلاق ليست صفة جامدة نولد بها، بل مهارة تتطور بالملاحظة والتدريب. قيّم نفسك بصدق من 1 إلى 5 في المحاور الخمسة لترى خارطة قوتك وفرص تطورك.",
+                assess_result_title: "نتيجة تقييمك الحالي",
+                assess_score_unit: "الوعي الأخلاقي",
+                tracker_badge: "التطبيق العملي • الدقيقة [00:03:51]",
+                tracker_title: "متتبع التدريب اليومي على فن التعامل",
+                tracker_desc: "يؤكد الفيديو أن التحول الحقيقي يبدأ بتدريبات يومية بسيطة في البيت والعمل والشارع. ضع علامة صح كلما طبقت إحدى هذه الممارسات اليوم!",
+                tracker_progress_label: "مستوى إنجاز التدريب اليومي",
+                tracker_reset: "إعادة ضبط اليوم",
+                tracker_share: "نسخ ملخص القواعد الذهبية",
+                footer_brand: "فن التعامل واكتساب الأخلاق",
+                footer_about: "تطبيق ويب تفاعلي مبني على مراجعة كتاب «فن التعامل واكتساب الأخلاق» من قناة Abouawd Studio.",
+                footer_question_label: "سؤال قبل كل كلمة [00:04:38]",
+                footer_question: "«هل هذه الكلمة ستقربنا أم ستبعدنا؟»",
+                footer_yt_btn: "مشاهدة الفيديو الأصلي على يوتيوب",
+                svg_left: "لين",
+                svg_right: "حزم",
+                toast_copied: "تم نسخ ملخص القواعد الذهبية إلى الحافظة بنجاح!",
+                toast_completed: "رائع! لقد أتممت جميع تدريبات فن التعامل لهذا اليوم!"
+            },
+            en: {
+                nav_title: "The Art of Dealing with People",
+                nav_subtitle: "Abouawd Studio • Interactive Guide",
+                nav_journey: "Video Journey",
+                nav_personalities: "People Types",
+                nav_balance: "Balance Equation",
+                nav_skills: "The 4 Skills",
+                nav_simulator: "Word Filter",
+                nav_assessment: "Self-Test",
+                nav_tracker: "Daily Practice",
+                hero_badge: "Abouawd Studio • Summary of 'The Art of Dealing with People'",
+                hero_title: "Why Do Some Relationships Succeed and Others Fail?",
+                hero_desc: "Have you ever wondered why some people effortlessly win hearts and build thriving relationships, while others struggle despite having good intentions? It's not luck—it's mastering 'The Art of Dealing with People' as a daily acquired skill.",
+                quote_label: "Core Golden Rule from the Video",
+                hero_quote: "\"People don't remember your words; they remember how they felt when they were with you.\"",
+                cta_simulator: "Try the 'Word Filter' Simulator",
+                cta_watch_yt: "Watch on YouTube",
+                video_chapters_title: "Jump directly to video chapters:",
+                chap_1: "Core Question",
+                chap_2: "Ethics is a Skill",
+                chap_3: "Sensitive vs Practical",
+                chap_4: "Balance Equation",
+                chap_5: "The 4 Skills",
+                chap_6: "The Word Filter",
+                journey_badge: "Interactive Video Timeline",
+                journey_title: "Core Pillars of 'The Art of Dealing with People'",
+                journey_sub: "Click any timestamp card to explore the key takeaway and jump to that exact moment in the video",
+                pers_badge: "Social Flexibility • Timestamp [00:01:10]",
+                pers_title: "People Are Not Alike: How to Connect with Each Type?",
+                pers_desc: "One of the biggest mistakes in relationships is treating everyone the exact same way. Emotionally intelligent people adapt their style to fit the person in front of them without losing authenticity.",
+                pers_btn_sensitive: "Sensitive Person",
+                pers_btn_practical: "Practical Person",
+                pers_btn_both: "Side-by-Side Comparison",
+                bal_badge: "The True Ethics Equation • Timestamp [00:01:52]",
+                bal_title: "Ethics = Balance (Neither Weakness Nor Harshness)",
+                bal_desc: "Move the interactive slider below to explore the spectrum between blind kindness (losing yourself), excessive harshness (losing hearts), and true balance (Gentleness + Firmness).",
+                bal_pole_left: "Blind Kindness / Weakness (0%)",
+                bal_pole_center: "Golden Balance (50%)",
+                bal_pole_right: "Excessive Harshness (100%)",
+                bal_preset_weak: "Test Weakness State",
+                bal_preset_ideal: "Reset to Golden Balance",
+                bal_preset_harsh: "Test Harshness State",
+                skills_badge: "The 4 Pillars • Timestamp [00:02:27]",
+                skills_title: "The 4 Crucial Skills in Dealing with People",
+                skills_desc: "The video highlights four practical everyday habits that determine whether your relationships flourish with warmth or break down over small frictions.",
+                sim_badge: "Real-Life Scenario Simulator • Timestamp [00:04:38]",
+                sim_title: "The Word Filter: \"Will This Word Bring Us Closer or Push Us Apart?\"",
+                sim_desc: "Before speaking in daily life situations, pass your response through the video's golden filter. Choose a scenario and test how each response impacts the relationship.",
+                sim_meter_label: "Heart Connection Meter",
+                assess_badge: "Self-Assessment • Timestamp [00:03:35]",
+                assess_title: "Character & Communication Skills Assessment",
+                assess_desc: "Good character isn't merely an innate trait—it's developed through awareness and continuous practice. Rate yourself honestly from 1 to 5 across these 5 pillars.",
+                assess_result_title: "Your Current Assessment",
+                assess_score_unit: "Social Mastery",
+                tracker_badge: "Daily Micro-Habits • Timestamp [00:03:51]",
+                tracker_title: "Daily Practice Tracker",
+                tracker_desc: "Real transformation happens through small daily actions at home, work, and in public. Check off each practice you applied today!",
+                tracker_progress_label: "Daily Practice Completion",
+                tracker_reset: "Reset Today",
+                tracker_share: "Copy Golden Rules Summary",
+                footer_brand: "The Art of Dealing with People",
+                footer_about: "An interactive web application based on the book review 'The Art of Dealing with People and Acquiring Good Character' by Abouawd Studio.",
+                footer_question_label: "Ask Before Every Word [00:04:38]",
+                footer_question: "\"Will this word bring us closer or push us apart?\"",
+                footer_yt_btn: "Watch Original Video on YouTube",
+                svg_left: "Gentle",
+                svg_right: "Firm",
+                toast_copied: "Golden rules summary copied to clipboard!",
+                toast_completed: "Amazing! You completed all daily relationship practices today!"
+            }
+        };
+
+        // --- DATA: TIMELINE PILLARS ---
+        const timelineData = [
+            {
+                time: "00:00:00",
+                seconds: 0,
+                icon: "fa-circle-question",
+                color: "brand",
+                title: { ar: "السؤال الجوهري: لماذا تنجح العلاقات؟", en: "The Core Question: Why Do Relationships Succeed?" },
+                desc: {
+                    ar: "النجاح في العلاقات ليس ضربة حظ، بل هو نتيجة مباشرة لأسلوبك في التعامل مع البشر وفهمك لطبيعتهم.",
+                    en: "Success in relationships isn't luck; it is the direct result of how you deal with people and understand human nature."
+                }
+            },
+            {
+                time: "00:00:50",
+                seconds: 50,
+                icon: "fa-seedling",
+                color: "teal",
+                title: { ar: "الأخلاق مهارة تُكتسب بالتدريب", en: "Ethics is an Acquired Skill" },
+                desc: {
+                    ar: "الأخلاق وحسن التعامل ليست مجرد صفات نولد بها، بل هي مهارات حياتية يمكن تعلمها وتطويرها بالممارسة الواعية.",
+                    en: "Good character and social grace aren't fixed traits you're just born with—they are learnable skills refined through practice."
+                }
+            },
+            {
+                time: "00:01:10",
+                seconds: 70,
+                icon: "fa-people-arrows",
+                color: "indigo",
+                title: { ar: "الناس مختلفون والمرونة الاجتماعية", en: "People Differ & Social Flexibility" },
+                desc: {
+                    ar: "الشخص الحساس يحتاج للتقدير، والشخص العملي يحتاج للوضوح. الذكاء هو تكييف أسلوبك مع من أمامك.",
+                    en: "A sensitive person needs appreciation, while a practical person needs clarity. True intelligence is adapting your style."
+                }
+            },
+            {
+                time: "00:01:52",
+                seconds: 112,
+                icon: "fa-scale-balanced",
+                color: "amber",
+                title: { ar: "معادلة التوازن: لين من غير ضعف", en: "The Balance Equation: Gentle Yet Firm" },
+                desc: {
+                    ar: "الأخلاق ليست طيبة عمياء تضيع معها حقوقك، وليست قسوة تنفر الناس؛ بل توازن يجمع بين اللين والحزم.",
+                    en: "Ethics isn't blind kindness where you lose your rights, nor harshness that repels others—it is balancing gentleness with firmness."
+                }
+            },
+            {
+                time: "00:02:27",
+                seconds: 147,
+                icon: "fa-layer-group",
+                color: "purple",
+                title: { ar: "المهارات الأربع الحاسمة", en: "The 4 Crucial Relationship Skills" },
+                desc: {
+                    ar: "اختيار الكلمات والأسلوب، الاستماع الحقيقي، الاحترام عند الاختلاف، والتحكم في الغضب وقت الانفعال.",
+                    en: "Word choice & tone, active listening without rushing to advise, respect during disagreement, and anger management."
+                }
+            },
+            {
+                time: "00:04:19",
+                seconds: 259,
+                icon: "fa-heart-circle-check",
+                color: "rose",
+                title: { ar: "الأثر الباقي وفلتر الكلمات [00:04:38]", en: "Lasting Impact & Word Filter [00:04:38]" },
+                desc: {
+                    ar: "الناس يتذكرون شعورهم معك. اسأل نفسك دائماً قبل الكلام: هل هذه الكلمة ستقربنا أم ستبعدنا؟",
+                    en: "People remember how they felt with you. Always ask before speaking: Will this word bring us closer or push us apart?"
+                }
+            }
+        ];
+
+        // --- DATA: PERSONALITY TYPES [00:01:10] ---
+        const personalityData = {
+            sensitive: {
+                badge: { ar: "النمط الأول • يحتاج للتقدير [00:01:10]", en: "Type 1 • Needs Appreciation [00:01:10]" },
+                title: { ar: "الشخص الحساس (العاطفي)", en: "The Sensitive Person" },
+                subtitle: {
+                    ar: "يتأثر بنبرة الصوت وتعبيرات الوجه والكلمات، ويبحث عن الأمان النفسي والتقدير قبل أي شيء.",
+                    en: "Deeply affected by tone of voice and word choice; seeks emotional safety and appreciation above all."
+                },
+                needs: {
+                    ar: ["التقدير والثناء الصادق على مجهوده", "مراعاة مشاعره عند توجيه أي ملاحظة", "الكلمة الطيبة والاحتواء العاطفي"],
+                    en: ["Sincere appreciation and praise for their effort", "Consideration for their feelings when giving feedback", "Warm words and emotional validation"]
+                },
+                avoid: {
+                    ar: ["النقد الجاف أو المباشر أمام الآخرين", "التقليل من مشاعره أو السخرية من حساسيته"],
+                    en: ["Blunt or harsh criticism, especially in public", "Dismissing their feelings or mocking their sensitivity"]
+                },
+                exampleGood: {
+                    ar: "«أقدّر جداً تعبك وحرصك في هذا العمل، ولو عدّلنا هذه النقطة البسيطة سيكون عملك متكاملاً.»",
+                    en: "\"I truly appreciate your care and effort on this; adjusting just this small detail will make it perfect.\""
+                },
+                exampleBad: {
+                    ar: "«هذا الجزء خطأ، أعده من جديد بسرعة.»",
+                    en: "\"This part is wrong, redo it quickly.\""
+                }
+            },
+            practical: {
+                badge: { ar: "النمط الثاني • يحتاج للوضوح [00:01:10]", en: "Type 2 • Needs Clarity [00:01:10]" },
+                title: { ar: "الشخص العملي (المنطقي)", en: "The Practical Person" },
+                subtitle: {
+                    ar: "يركز على الأهداف والنتائج والوقت، ويفضل الرسائل الواضحة والمحددة بعيداً عن المقدمات الطويلة.",
+                    en: "Focuses on goals, efficiency, and outcomes; prefers clear, structured communication without long preambles."
+                },
+                needs: {
+                    ar: ["الوضوح والدخول في صلب الموضوع مباشرة", "التركيز على الحلول العملية والخطوات الواضحة", "احترام الوقت والالتزام بالمواعيد"],
+                    en: ["Clarity and getting straight to the point", "Focusing on actionable solutions and clear steps", "Respecting time and commitments"]
+                },
+                avoid: {
+                    ar: ["اللف والدوران أو المقدمات العاطفية المطولة", "الشكوى المستمرة دون طرح حلول عملية"],
+                    en: ["Beating around the bush or overly long emotional intros", "Endless complaining without proposing practical solutions"]
+                },
+                exampleGood: {
+                    ar: "«لدينا تحدٍّ في النقطة (أ)، وأقترح الحل (ب) لتوفير يومين من الوقت، ما رأيك؟»",
+                    en: "\"We have an issue in step A, and I propose solution B to save two days. What do you think?\""
+                },
+                exampleBad: {
+                    ar: "«أنا متضايق جداً من ضغط الشغل ولا أعرف ماذا نفعل...»",
+                    en: "\"I feel so overwhelmed with everything going on and don't know what to do...\""
+                }
+            }
+        };
+
+        // --- DATA: 4 CRUCIAL SKILLS [00:02:27] ---
+        const skillsData = [
+            {
+                id: 1,
+                time: "00:02:53",
+                seconds: 173,
+                icon: "fa-comment-dots",
+                color: "emerald",
+                title: { ar: "1. كلامك وأسلوبك (كيف تقولها؟)", en: "1. Your Words & Delivery" },
+                core: {
+                    ar: "نفس الفكرة يمكن أن تُقال بأسلوب يفتح القلوب، أو بأسلوب يغلقها وينفر الناس منك.",
+                    en: "The exact same idea can be expressed in a way that opens hearts or shuts them down."
+                },
+                badWay: {
+                    ar: "أسلوب هادم: «أنت دائماً تتأخر ولا تهتم بمواعيدنا!»",
+                    en: "Destructive Tone: \"You're always late and never care about our time!\""
+                },
+                goodWay: {
+                    ar: "أسلوب بانٍ: «يسعدني وجودك معنا في الموعد لنستفيد من وقتنا معاً.»",
+                    en: "Constructive Tone: \"I really love when we start on time so we can make the most of our meeting.\""
+                }
+            },
+            {
+                id: 2,
+                time: "00:03:01",
+                seconds: 181,
+                icon: "fa-ear-listen",
+                color: "blue",
+                title: { ar: "2. الاستماع الحقيقي (لا فرض النصائح)", en: "2. Active Listening (Not Just Advising)" },
+                core: {
+                    ar: "أغلب الناس عندما يتحدثون إليك لا يبحثون عن محاضرة أو نصيحة فورية، بل يحتاجون لمن يفهمهم ويستمع إليهم بصدق.",
+                    en: "Most people venting to you aren't looking for an instant lecture or fix—they need someone who genuinely listens and understands."
+                },
+                badWay: {
+                    ar: "أسلوب هادم: المقاطعة الفورية بـ «كان المفروض تعمل كذا وكذا...»",
+                    en: "Destructive Habit: Interrupting immediately with \"Well, you should have done X and Y...\""
+                },
+                goodWay: {
+                    ar: "أسلوب بانٍ: الإنصات بالعين والقلب وقول «أفهم شعورك تماماً، كان موقفاً صعباً عليك.»",
+                    en: "Constructive Habit: Listening attentively and saying, \"I completely understand how you feel; that sounds really tough.\""
+                }
+            },
+            {
+                id: 3,
+                time: "00:03:09",
+                seconds: 189,
+                icon: "fa-handshake-simple",
+                color: "purple",
+                title: { ar: "3. الاحترام عند الاختلاف (بلا تهميش)", en: "3. Respect in Disagreement" },
+                core: {
+                    ar: "الاختلاف في وجهات النظر طبيعي، لكن الفن هو أن تختلف مع الفكرة دون أن تهمش الشخص أو تقلل من قيمته.",
+                    en: "Disagreement is natural, but true art lies in disagreeing with an idea without belittling or marginalizing the person."
+                },
+                badWay: {
+                    ar: "أسلوب هادم: «كلامك غير منطقي أبداً وأنت لا تفهم الموضوع.»",
+                    en: "Destructive Habit: \"What you're saying makes zero sense, you don't get it.\""
+                },
+                goodWay: {
+                    ar: "أسلوب بانٍ: «أحترم زاوية نظرك جداً، واسمح لي أن أعرض زاوية أخرى قد تكمل الصورة.»",
+                    en: "Constructive Habit: \"I really respect your perspective; let me share another angle that might complement it.\""
+                }
+            },
+            {
+                id: 4,
+                time: "00:03:17",
+                seconds: 197,
+                icon: "fa-fire-extinguisher",
+                color: "amber",
+                title: { ar: "4. التحكم في الغضب لحظة الانفعال", en: "4. Anger Management in Emotional Moments" },
+                core: {
+                    ar: "لحظة غضب واحدة غير منضبطة بكلمة جارحة قد تهدم رصيد مودة وثقة بنيته في سنوات.",
+                    en: "A single uncontrolled moment of anger with hurtful words can destroy years of built-up trust and affection."
+                },
+                badWay: {
+                    ar: "أسلوب هادم: الرد الفوري الجارح أثناء فورة الغضب لإثبات القوة.",
+                    en: "Destructive Habit: Lashing out immediately in the heat of the moment to prove dominance."
+                },
+                goodWay: {
+                    ar: "أسلوب بانٍ: التوقف، أخذ نفس عميق، وتأجيل النقاش الحاسم حتى تهدأ المشاعر.",
+                    en: "Constructive Habit: Pausing, taking a deep breath, and postponing critical discussions until emotions settle."
+                }
+            }
+        ];
+
+        // --- DATA: WORD FILTER SCENARIOS [00:04:38] ---
+        const scenariosData = [
+            {
+                id: 0,
+                tabTitle: { ar: "1. صديق يفضفض", en: "1. Friend Venting" },
+                timestamp: "00:03:01",
+                situation: {
+                    ar: "جاءك صديق مقرب يشعر بالإحباط الشديد بسبب ضغط في عمله وبدأ يحكي لك عن تعبه. قبل أن ترد، مرر كلامك على فلتر: «هل ستقربنا أم ستبعدنا؟»",
+                    en: "A close friend comes to you feeling exhausted and frustrated about work pressure. Before replying, apply the filter: 'Will this bring us closer or push us apart?'"
+                },
+                options: [
+                    {
+                        text: {
+                            ar: "«أنت تبالغ دائماً! كل الناس تعاني في الشغل، كان المفروض تشتغل بصمت وتتحمل.»",
+                            en: "\"You always exaggerate! Everyone struggles at work, you should just tough it out.\""
+                        },
+                        type: "harsh",
+                        impactScore: 20,
+                        verdict: { ar: "يبعد القلوب ويهدم الأمان النفسي", en: "Pushes Apart & Destroys Emotional Safety" },
+                        explanation: {
+                            ar: "هذا الرد يهمش مشاعر صديقك ويفرض نصيحة قاسية. كما ذكر الفيديو في الدقيقة [00:03:01]، الاستماع الحقيقي أهم من إلقاء النصائح الفوقية.",
+                            en: "This dismisses your friend's feelings. As highlighted at [00:03:01], active empathetic listening is far more powerful than lecturing."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«معك حق، اترك الشغل فوراً ولا تتحمل أي شيء، صحتك أهم حتى لو بلا بديل!»",
+                            en: "\"You're right, just quit right now on the spot even without a backup plan!\""
+                        },
+                        type: "weak",
+                        impactScore: 55,
+                        verdict: { ar: "مجاراة عاطفية تفتقر للحكمة والتوازن", en: "Unbalanced Impulse Without Wisdom" },
+                        explanation: {
+                            ar: "رغم أن فيه تعاطفاً ظاهرياً، إلا أنه اندفاع غير متوازن قد يضر بصديقك بدلاً من احتوائه بهدوء.",
+                            en: "While seemingly supportive, pushing impulsive decisions lacks the calm balance needed to truly help a friend."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«حاسس بيك جداً ومقدّر حجم الضغط اللي مريت بيه اليوم.. احكي لي أكثر، أنا معك وأسمعك.»",
+                            en: "\"I really hear you and appreciate how heavy today has been for you. Tell me more, I'm here listening.\""
+                        },
+                        type: "balanced",
+                        impactScore: 100,
+                        verdict: { ar: "يقرب القلوب ويبني ثقة عميقة!", en: "Brings Hearts Closer & Builds Deep Trust!" },
+                        explanation: {
+                            ar: "رد مثالي يطبق قاعدة [00:03:01] و [00:04:19]: جعلت صديقك يشعر بالاحتواء والتقدير قبل تقديم أي حلول.",
+                            en: "Spot on! Applies [00:03:01] & [00:04:19]: You gave your friend emotional safety and active listening first."
+                        }
+                    }
+                ]
+            },
+            {
+                id: 1,
+                tabTitle: { ar: "2. خلاف في الرأي", en: "2. Disagreement" },
+                timestamp: "00:03:09",
+                situation: {
+                    ar: "في اجتماع عمل أو نقاش عائلي، طرح شخص فكرة ترى أنها غير مناسبة تماماً. كيف تعبر عن رأيك؟",
+                    en: "During a work meeting or family discussion, someone proposes an idea you believe won't work at all. How do you respond?"
+                },
+                options: [
+                    {
+                        text: {
+                            ar: "«هذه فكرة فاشلة وتدل على عدم خبرة، دعونا لا نضيع وقتنا فيها.»",
+                            en: "\"That's a terrible idea and shows lack of experience; let's not waste time on it.\""
+                        },
+                        type: "harsh",
+                        impactScore: 15,
+                        verdict: { ar: "يبعد القلوب (تهميش وإحراج علني)", en: "Pushes Apart (Public Belittling)" },
+                        explanation: {
+                            ar: "في الدقيقة [00:03:09] يحذر الفيديو من تهميش الآخر عند الاختلاف. كسبت النقطة ربما، لكنك خسرت قلب زميلك.",
+                            en: "At [00:03:09], the video warns against marginalizing others during disagreement. People never forget how you made them feel."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«أصمت تماماً وأوافق على الفكرة الخاطئة حتى لا يزعل مني أحد.»",
+                            en: "\"I stay completely silent and agree with the flawed idea just so nobody gets upset with me.\""
+                        },
+                        type: "weak",
+                        impactScore: 45,
+                        verdict: { ar: "طيبة عمياء / ضعف [00:01:52]", en: "Blind Kindness / Weakness [00:01:52]" },
+                        explanation: {
+                            ar: "كتمان الحق مجاملةً للآخرين هو ضعف وليس أخلاقاً. التوازن هو قول رأيك بأدب وحزم.",
+                            en: "Hiding the truth out of fear of displeasing others is weakness, not ethics. Balance means speaking up respectfully."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«أحترم حرصك وهدفك من الفكرة جداً، ولدي ملاحظة حول تكلفة التنفيذ، ما رأيكم لو طورناها بهذا الشكل؟»",
+                            en: "\"I really respect the goal behind your idea. I noticed a challenge with implementation cost—what if we refine it this way?\""
+                        },
+                        type: "balanced",
+                        impactScore: 100,
+                        verdict: { ar: "يقرب القلوب (احترام + وضوح متوازن)", en: "Brings Closer (Respect + Balanced Clarity)" },
+                        explanation: {
+                            ar: "حفظت كرامة الشخص، احترمت وجهة نظره، وقدمت رأيك بوضوح وحزم دون تهميش [00:03:09].",
+                            en: "You honored the person's dignity, respected their intent, and expressed your view clearly and constructively [00:03:09]."
+                        }
+                    }
+                ]
+            },
+            {
+                id: 2,
+                tabTitle: { ar: "3. لحظة غضب", en: "3. Moment of Anger" },
+                timestamp: "00:03:17",
+                situation: {
+                    ar: "أخطأ شخص قريب منك خطأً أثار غضبك بشدة في لحظة ضغط. ما هو تصرفك الأول؟",
+                    en: "Someone close to you makes a frustrating mistake while you're already stressed. What is your immediate reaction?"
+                },
+                options: [
+                    {
+                        text: {
+                            ar: "«أنفجر فوراً وأسمعه كلاماً قاسياً ليعرف حجم خطئه ولا يكرره!»",
+                            en: "\"I explode immediately with harsh words so they realize how badly they messed up!\""
+                        },
+                        type: "harsh",
+                        impactScore: 10,
+                        verdict: { ar: "يهدم العلاقة في لحظة [00:03:17]", en: "Destroys Trust in Seconds [00:03:17]" },
+                        explanation: {
+                            ar: "لحظة الغضب هي الاختبار الحقيقي للأخلاق. الكلمة الجارحة تبقى في الذاكرة طويلاً حتى بعد الاعتذار.",
+                            en: "Moments of anger are the true test of character. Hurtful words leave scars long after apologies."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«أكتم الغضب في قلبي وأبتسم كأن شيئاً لم يحدث، لكنني أحمل ضغينة بداخلي وأتجنبه لاحقاً.»",
+                            en: "\"I bottle it up, fake a smile, and silently hold a grudge while distancing myself later.\""
+                        },
+                        type: "weak",
+                        impactScore: 40,
+                        verdict: { ar: "كبت سلبي يورث الجفاء", en: "Passive Suppression That Breeds Resentment" },
+                        explanation: {
+                            ar: "التوازن يقتضي كسب الشخص دون أن تخسر نفسك أو تكتم استياءك بطريقة غير صحية.",
+                            en: "True balance means winning the person without losing yourself or harboring silent resentment."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«آخذ نفساً عميقاً، وأقول بهدوء: الموقف أزعجني الآن، دعنا نتحدث فيه بعد قليل حين نهدأ لنحله معاً.»",
+                            en: "\"I take a deep breath and say calmly: This upset me right now; let's talk about it in a bit once we're calm so we can solve it.\""
+                        },
+                        type: "balanced",
+                        impactScore: 100,
+                        verdict: { ar: "قمة النضج: تحكم في الغضب + حزم راقٍ", en: "Peak Maturity: Emotional Control + Firmness" },
+                        explanation: {
+                            ar: "طبقت مهارة التحكم في الغضب [00:03:17] ومعادلة التوازن (لين + حزم) [00:01:52].",
+                            en: "You mastered anger management [00:03:17] and the balance equation (Gentleness + Firmness) [00:01:52]."
+                        }
+                    }
+                ]
+            },
+            {
+                id: 3,
+                tabTitle: { ar: "4. الحساس والعملي", en: "4. Sensitive vs Practical" },
+                timestamp: "00:01:10",
+                situation: {
+                    ar: "تريد طلب تعديل على مهمة من زميلين في فريقك: الأول شخص حساس جداً، والثاني شخص عملي جداً. كيف تتصرف؟",
+                    en: "You need to request revisions from two teammates: one is highly sensitive, and the other is strictly practical. How do you approach them?"
+                },
+                options: [
+                    {
+                        text: {
+                            ar: "«أرسل لهما نفس الرسالة الجافة والمختصرة: يرجى تعديل الأخطاء في الصفحة 3 قبل الغد.»",
+                            en: "\"Send both the exact same blunt message: Fix the errors on page 3 before tomorrow.\""
+                        },
+                        type: "harsh",
+                        impactScore: 35,
+                        verdict: { ar: "جمود اجتماعي يجرح الشخص الحساس", en: "Rigidity That Hurts the Sensitive Teammate" },
+                        explanation: {
+                            ar: "الشخص العملي قد يتقبلها، لكن الشخص الحساس سيشعر بالإحباط وغياب التقدير لمجهوده [00:01:10].",
+                            en: "While the practical person won't mind, the sensitive teammate will feel unappreciated and demoralized [00:01:10]."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«أقوم أنا بالتعديل بدلاً منهما حتى لا أحرج الحساس ولا أزعج العملي!»",
+                            en: "\"I just redo all the work myself so I don't embarrass the sensitive one or bother the practical one!\""
+                        },
+                        type: "weak",
+                        impactScore: 30,
+                        verdict: { ar: "خسارة للنفس والوقت (ضعف إداري)", en: "Losing Yourself & Your Time (Weakness)" },
+                        explanation: {
+                            ar: "هذا استنزاف لنفسك ووقتك ويتناقض مع قاعدة (اكسب الشخص دون أن تخسر نفسك) [00:02:05].",
+                            en: "Doing others' work out of fear of speaking up contradicts 'winning people without losing yourself' [00:02:05]."
+                        }
+                    },
+                    {
+                        text: {
+                            ar: "«أبدأ مع الحساس بتقدير مجهوده الرائع ثم أطلب التعديل بلطف، ومع العملي أحدد النقاط المطلوبة بوضوح ومباشرة.»",
+                            en: "\"With the sensitive teammate, I praise their effort first then gently note the edit; with the practical one, I outline the exact bullet points clearly.\""
+                        },
+                        type: "balanced",
+                        impactScore: 100,
+                        verdict: { ar: "مرونة اجتماعية ذكية [00:01:10]", en: "Smart Social Flexibility [00:01:10]" },
+                        explanation: {
+                            ar: "أحسنت! أعطيت الحساس ما يحتاجه من تقدير، وأعطيت العملي ما يحتاجه من وضوح.",
+                            en: "Brilliant! You gave the sensitive person appreciation and the practical person clarity."
+                        }
+                    }
+                ]
+            }
+        ];
+
+        // --- DATA: SELF ASSESSMENT PILLARS [00:03:35] ---
+        const assessmentData = [
+            {
+                id: 0,
+                title: { ar: "1. انتقاء الكلمات وحلاوة الأسلوب [00:02:53]", en: "1. Word Choice & Gentle Delivery [00:02:53]" },
+                question: {
+                    ar: "أحرص على اختيار عبارات لطيفة ومهذبة حتى عند النقد أو المطالبة بحقي.",
+                    en: "I consciously choose kind, respectful phrasing even when giving feedback or claiming my rights."
+                }
+            },
+            {
+                id: 1,
+                title: { ar: "2. الاستماع الحقيقي والاحتواء [00:03:01]", en: "2. Active & Empathetic Listening [00:03:01]" },
+                question: {
+                    ar: "أستمع للطرف الآخر بهدف فهمه واحتواء مشاعره قبل التسرع في إلقاء النصائح.",
+                    en: "I listen to understand and validate others' feelings before rushing to give unsolicited advice."
+                }
+            },
+            {
+                id: 2,
+                title: { ar: "3. الاحترام عند الاختلاف [00:03:09]", en: "3. Respect During Disagreements [00:03:09]" },
+                question: {
+                    ar: "عندما أختلف مع شخص في الرأي، أحافظ على تقديره ولا أهمشه أو أقلل من شأنه.",
+                    en: "When I disagree with someone, I maintain full respect and never belittle or marginalize them."
+                }
+            },
+            {
+                id: 3,
+                title: { ar: "4. ضبط النفس لحظة الغضب [00:03:17]", en: "4. Emotional Control in Anger [00:03:17]" },
+                question: {
+                    ar: "أتمالك نفسي وقت الانفعال ولا أسمح للحظة غضب أن تدفعني لقول كلمات جارحة.",
+                    en: "I pause during moments of anger and prevent frustration from making me say hurtful things."
+                }
+            },
+            {
+                id: 4,
+                title: { ar: "5. التوازن والمرونة مع الشخصيات [00:01:10 & 00:01:52]", en: "5. Flexibility & Balanced Boundaries [00:01:10 & 00:01:52]" },
+                question: {
+                    ar: "أتعامل بمرونة مع الحساس والعملي، وأجمع بين اللين والحزم دون أن أخسر نفسي.",
+                    en: "I adapt to sensitive and practical people while combining kindness with clear personal boundaries."
+                }
+            }
+        ];
+
+        // --- DATA: DAILY TRACKER ITEMS [00:03:51] ---
+        const trackerItemsData = [
+            {
+                id: 0,
+                ar: "سألت نفسي قبل الرد في موقف مهم: «هل هذه الكلمة ستقربنا أم ستبعدنا؟» [00:04:38]",
+                en: "Asked myself before replying: \"Will this word bring us closer or push us apart?\" [00:04:38]"
+            },
+            {
+                id: 1,
+                ar: "استمعت لشخص يتحدث إليّ بإنصات حقيقي واهتمام دون مقاطعة أو فرض نصيحة [00:03:01]",
+                en: "Listened attentively to someone without interrupting or forcing immediate advice [00:03:01]"
+            },
+            {
+                id: 2,
+                ar: "راعيْت طبيعة الشخص الذي أمامي (أعطيت التقدير للحساس، والوضوح للعملي) [00:01:10]",
+                en: "Adapted my communication style (gave appreciation to the sensitive, clarity to the practical) [00:01:10]"
+            },
+            {
+                id: 3,
+                ar: "ضبطت أعصابي في موقف مستفز واخترت الهدوء بدلاً من الانفعال الجارح [00:03:17]",
+                en: "Controlled my temper in a frustrating moment and chose calm over harsh reaction [00:03:17]"
+            },
+            {
+                id: 4,
+                ar: "طبقت معادلة التوازن: كنت لطيفاً في أسلوبي وحازماً في الحفاظ على حدودي وحقي [00:01:52]",
+                en: "Practiced true balance: gentle in manner while remaining firm on my boundaries [00:01:52]"
+            }
+        ];
+
+        // --- VIDEO SEEK HELPER ---
+        function seekVideo(seconds) {
+            const iframe = document.getElementById('yt-iframe');
+            if (iframe) {
+                iframe.src = `https://www.youtube.com/embed/LUMg5dvfljM?start=${seconds}&autoplay=1&rel=0`;
+                document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderTimeline() {
+            const container = document.getElementById('timeline-grid');
+            const colorMap = {
+                brand: "from-emerald-500/15 to-teal-500/5 border-emerald-200 dark:border-emerald-800/70 text-emerald-600 dark:text-emerald-400",
+                teal: "from-teal-500/15 to-cyan-500/5 border-teal-200 dark:border-teal-800/70 text-teal-600 dark:text-teal-400",
+                indigo: "from-indigo-500/15 to-blue-500/5 border-indigo-200 dark:border-indigo-800/70 text-indigo-600 dark:text-indigo-400",
+                amber: "from-amber-500/15 to-orange-500/5 border-amber-200 dark:border-amber-800/70 text-amber-600 dark:text-amber-400",
+                purple: "from-purple-500/15 to-fuchsia-500/5 border-purple-200 dark:border-purple-800/70 text-purple-600 dark:text-purple-400",
+                rose: "from-rose-500/15 to-pink-500/5 border-rose-200 dark:border-rose-800/70 text-rose-600 dark:text-rose-400"
+            };
+
+            container.innerHTML = timelineData.map(item => `
+                <div onclick="seekVideo(${item.seconds})" class="cursor-pointer group rounded-3xl p-6 bg-gradient-to-br ${colorMap[item.color]} border bg-white dark:bg-slate-900 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between gap-4">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-11 h-11 rounded-2xl bg-white dark:bg-slate-800 shadow-sm flex items-center justify-center text-lg">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-white/90 dark:bg-slate-800 text-slate-700 dark:text-slate-200 shadow-sm flex items-center gap-1.5 group-hover:bg-brand-600 group-hover:text-white transition">
+                                <i class="fa-solid fa-play text-[10px]"></i> ${item.time}
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">${item.title[currentLang]}</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${item.desc[currentLang]}</p>
+                    </div>
+                    <div class="text-xs font-bold flex items-center gap-1.5 opacity-80 group-hover:opacity-100">
+                        <span>${currentLang === 'ar' ? 'تشغيل هذه النقطة في الفيديو' : 'Play this segment in video'}</span>
+                        <i class="fa-solid ${currentLang === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'}"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectPersonality(mode) {
+            currentPersonalityView = mode;
+            const btnSens = document.getElementById('btn-pers-sensitive');
+            const btnPrac = document.getElementById('btn-pers-practical');
+            const btnBoth = document.getElementById('btn-pers-both');
+
+            const inactiveClass = "px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white";
+            btnSens.className = mode === 'sensitive' ? "px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 shadow-sm" : inactiveClass;
+            btnPrac.className = mode === 'practical' ? "px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm" : inactiveClass;
+            btnBoth.className = mode === 'both' ? "px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center gap-2 bg-white dark:bg-slate-900 text-brand-600 dark:text-brand-400 shadow-sm" : inactiveClass;
+
+            renderPersonalities();
+        }
+
+        function renderPersonalities() {
+            const container = document.getElementById('personality-display');
+            const buildCard = (key, accentColor, icon) => {
+                const d = personalityData[key];
+                const isRose = accentColor === 'rose';
+                return `
+                    <div class="rounded-3xl p-6 sm:p-8 bg-white dark:bg-slate-900 border-2 ${isRose ? 'border-rose-200 dark:border-rose-900/60' : 'border-blue-200 dark:border-blue-900/60'} shadow-xl space-y-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1.5">
+                                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${isRose ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'}">${d.badge[currentLang]}</span>
+                                <h3 class="text-2xl font-black text-slate-900 dark:text-white">${d.title[currentLang]}</h3>
+                            </div>
+                            <div class="w-14 h-14 rounded-2xl ${isRose ? 'bg-rose-500/10 text-rose-500' : 'bg-blue-500/10 text-blue-500'} flex items-center justify-center text-2xl shrink-0">
+                                <i class="fa-solid ${icon}"></i>
+                            </div>
+                        </div>
+
+                        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">${d.subtitle[currentLang]}</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/50 space-y-2">
+                                <h4 class="text-xs font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>${currentLang === 'ar' ? 'مفاتيح كسب هذه الشخصية' : 'Keys to Winning Them Over'}</span>
+                                </h4>
+                                <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                    ${d.needs[currentLang].map(n => `<li class="flex items-start gap-2"><span class="text-emerald-500 font-bold">•</span><span>${n}</span></li>`).join('')}
+                                </ul>
+                            </div>
+
+                            <div class="p-4 rounded-2xl bg-red-50/70 dark:bg-red-950/30 border border-red-200/70 dark:border-red-800/50 space-y-2">
+                                <h4 class="text-xs font-extrabold uppercase tracking-wider text-red-700 dark:text-red-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    <span>${currentLang === 'ar' ? 'احذر من هذه الأخطاء معه' : 'Avoid These Mistakes'}</span>
+                                </h4>
+                                <ul class="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                                    ${d.avoid[currentLang].map(a => `<li class="flex items-start gap-2"><span class="text-red-500 font-bold">•</span><span>${a}</span></li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-2">
+                            <div class="text-xs font-bold text-brand-600 dark:text-brand-400">
+                                <i class="fa-solid fa-comment-check mx-1"></i>
+                                ${currentLang === 'ar' ? 'مثال عملي للعبارة المناسبة:' : 'Practical Phrasing Example:'}
+                            </div>
+                            <p class="text-sm font-bold text-slate-800 dark:text-slate-100">${d.exampleGood[currentLang]}</p>
+                            <p class="text-xs text-red-500 dark:text-red-400 line-through opacity-80">${d.exampleBad[currentLang]}</p>
+                        </div>
+                    </div>
+                `;
+            };
+
+            if (currentPersonalityView === 'sensitive') {
+                container.className = "grid grid-cols-1 max-w-3xl mx-auto gap-8";
+                container.innerHTML = buildCard('sensitive', 'rose', 'fa-heart');
+            } else if (currentPersonalityView === 'practical') {
+                container.className = "grid grid-cols-1 max-w-3xl mx-auto gap-8";
+                container.innerHTML = buildCard('practical', 'blue', 'fa-briefcase');
+            } else {
+                container.className = "grid grid-cols-1 lg:grid-cols-2 gap-8";
+                container.innerHTML = buildCard('sensitive', 'rose', 'fa-heart') + buildCard('practical', 'blue', 'fa-briefcase');
+            }
+        }
+
+        // --- BALANCE EQUATION LOGIC [00:01:52] ---
+        function setBalancePreset(val) {
+            const input = document.getElementById('balance-input');
+            input.value = val;
+            updateBalance(val);
+        }
+
+        function updateBalance(val) {
+            currentBalanceValue = parseInt(val, 10);
+            const angle = (currentBalanceValue - 50) * 0.35; // -17.5 deg to +17.5 deg
+            const beam = document.getElementById('scale-beam');
+            if (beam) {
+                beam.setAttribute('transform', `rotate(${angle}, 200, 75)`);
+            }
+
+            const box = document.getElementById('balance-feedback');
+            let stateObj = {};
+
+            if (currentBalanceValue < 35) {
+                // Blind Kindness / Weakness
+                box.className = "p-6 rounded-2xl border-2 bg-blue-50/80 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800 text-blue-950 dark:text-blue-100 transition-all";
+                stateObj = {
+                    title: currentLang === 'ar' ? `النتيجة (${currentBalanceValue}%): طيبة عمياء وضعف (تخسر نفسك)` : `Result (${currentBalanceValue}%): Blind Kindness & Weakness (Losing Yourself)`,
+                    desc: currentLang === 'ar'
+                        ? "عندما تبالغ في اللين على حساب كرامتك وحدودك، يطمع فيك البعض وتخسر نفسك وراحتك النفسية. الفيديو يؤكد [00:01:52]: الأخلاق الحقيقية ليست ضعفاً ولا استسلاماً."
+                        : "When you over-accommodate at the expense of your boundaries, you lose yourself and invite exploitation. As noted at [00:01:52], true ethics is never weakness.",
+                    pill: currentLang === 'ar' ? "⚠️ تحتاج إلى إضافة الحزم والحدود الواضحة" : "⚠️ Needs more firmness and clear boundaries"
+                };
+            } else if (currentBalanceValue <= 65) {
+                // Golden Balance
+                box.className = "p-6 rounded-2xl border-2 bg-emerald-50/90 dark:bg-emerald-950/40 border-emerald-400 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 transition-all shadow-md";
+                stateObj = {
+                    title: currentLang === 'ar' ? `النتيجة (${currentBalanceValue}%): التوازن الذهبي (لين + حزم) [00:01:52]` : `Result (${currentBalanceValue}%): Golden Balance (Gentleness + Firmness) [00:01:52]`,
+                    desc: currentLang === 'ar'
+                        ? "هذه هي قمة «فن التعامل واكتساب الأخلاق»: تكسب الشخص الذي أمامك دون أن تخسر نفسك! تجمع بين الكلمة الطيبة والأسلوب الراقي من جهة، والوضوح والحفاظ على حقوقك من جهة أخرى."
+                        : "This is the pinnacle of 'The Art of Dealing with People': You win the person over without losing yourself! You combine warm respect with clear, dignified boundaries.",
+                    pill: currentLang === 'ar' ? "✅ المعادلة المثالية: تكسب القلوب وتحفظ كرامتك" : "✅ Ideal Equation: Win hearts while keeping self-respect"
+                };
+            } else {
+                // Excessive Harshness
+                box.className = "p-6 rounded-2xl border-2 bg-red-50/80 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-950 dark:text-red-100 transition-all";
+                stateObj = {
+                    title: currentLang === 'ar' ? `النتيجة (${currentBalanceValue}%): قسوة مفرطة وفظاظة (تخسر القلوب)` : `Result (${currentBalanceValue}%): Excessive Harshness (Losing Hearts)`,
+                    desc: currentLang === 'ar'
+                        ? "المبالغة في الشدة بحجة الصراحة أو القوة تجرح المشاعر وتجعل الناس ينفرون منك حتى لو كنت على حق. تذكر: الناس لا يتذكرون كلامك، بل يتذكرون شعورهم وهم معك."
+                        : "Excessive harshness disguised as 'brutal honesty' wounds feelings and pushes people away even when you're right. Remember: people remember how they felt around you.",
+                    pill: currentLang === 'ar' ? "⚠️ تحتاج إلى اللين والرحمة في الأسلوب" : "⚠️ Needs more gentleness and empathy in delivery"
+                };
+            }
+
+            box.innerHTML = `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                    <h4 class="text-lg font-extrabold">${stateObj.title}</h4>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-white/80 dark:bg-slate-900/80">${stateObj.pill}</span>
+                </div>
+                <p class="text-sm leading-relaxed opacity-90">${stateObj.desc}</p>
+            `;
+        }
+
+        // --- RENDER 4 SKILLS [00:02:27] ---
+        function renderSkills() {
+            const container = document.getElementById('skills-grid');
+            container.innerHTML = skillsData.map(skill => `
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-lg hover:shadow-xl transition flex flex-col justify-between gap-5">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-xl">
+                                <i class="fa-solid ${skill.icon}"></i>
+                            </div>
+                            <button onclick="seekVideo(${skill.seconds})" class="px-3 py-1 rounded-xl text-xs font-mono font-bold bg-slate-100 hover:bg-brand-600 hover:text-white dark:bg-slate-800 dark:hover:bg-brand-600 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-play text-[10px]"></i> ${skill.time}
+                            </button>
+                        </div>
+
+                        <h3 class="text-xl font-extrabold text-slate-900 dark:text-white">${skill.title[currentLang]}</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${skill.core[currentLang]}</p>
+                    </div>
+
+                    <div class="space-y-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs sm:text-sm">
+                        <div class="p-3 rounded-xl bg-red-50/70 dark:bg-red-950/30 text-red-800 dark:text-red-300 border border-red-200/60 dark:border-red-900/50 flex items-start gap-2">
+                            <i class="fa-solid fa-circle-xmark text-red-500 mt-1 shrink-0"></i>
+                            <span>${skill.badWay[currentLang]}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200 border border-emerald-200/60 dark:border-emerald-900/50 flex items-start gap-2 font-semibold">
+                            <i class="fa-solid fa-circle-check text-emerald-500 mt-1 shrink-0"></i>
+                            <span>${skill.goodWay[currentLang]}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- RENDER WORD FILTER SIMULATOR [00:04:38] ---
+        function selectScenario(idx) {
+            currentScenarioIndex = idx;
+            selectedScenarioOption = null;
+            renderSimulator();
+        }
+
+        function chooseScenarioOption(optIdx) {
+            selectedScenarioOption = optIdx;
+            renderSimulator();
+        }
+
+        function renderSimulator() {
+            const tabsContainer = document.getElementById('scenario-tabs');
+            const contentContainer = document.getElementById('scenario-content');
+            const scoreDisplay = document.getElementById('sim-score-display');
+
+            tabsContainer.innerHTML = scenariosData.map((s, idx) => `
+                <button onclick="selectScenario(${idx})" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition ${idx === currentScenarioIndex ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/30' : 'bg-slate-700/70 text-slate-300 hover:bg-slate-700'}">
+                    ${s.tabTitle[currentLang]}
+                </button>
+            `).join('');
+
+            const activeScenario = scenariosData[currentScenarioIndex];
+            let feedbackHtml = '';
+
+            if (selectedScenarioOption !== null) {
+                const chosen = activeScenario.options[selectedScenarioOption];
+                scoreDisplay.textContent = `${chosen.impactScore}%`;
+                const isBalanced = chosen.type === 'balanced';
+                const isWeak = chosen.type === 'weak';
+
+                const badgeColors = isBalanced
+                    ? 'bg-emerald-500/20 border-emerald-400 text-emerald-200'
+                    : isWeak
+                        ? 'bg-amber-500/20 border-amber-400 text-amber-200'
+                        : 'bg-red-500/20 border-red-400 text-red-200';
+
+                feedbackHtml = `
+                    <div class="p-5 rounded-2xl border-2 ${badgeColors} space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="font-extrabold text-base flex items-center gap-2">
+                                <i class="fa-solid ${isBalanced ? 'fa-heart-circle-check text-emerald-400' : isWeak ? 'fa-scale-unbalanced text-amber-400' : 'fa-heart-crack text-red-400'}"></i>
+                                ${chosen.verdict[currentLang]}
+                            </span>
+                            <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-900/60">${chosen.impactScore}%</span>
+                        </div>
+                        <p class="text-xs sm:text-sm leading-relaxed text-slate-200">${chosen.explanation[currentLang]}</p>
+                    </div>
+                `;
+            } else {
+                scoreDisplay.textContent = currentLang === 'ar' ? 'اختر رداً لاختباره' : 'Pick a response';
+            }
+
+            contentContainer.innerHTML = `
+                <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-700 space-y-2">
+                    <div class="flex items-center justify-between text-xs text-brand-400 font-bold">
+                        <span>${currentLang === 'ar' ? 'الموقف الواقعي:' : 'Real-Life Situation:'}</span>
+                        <button onclick="seekVideo(278)" class="font-mono hover:underline"><i class="fa-solid fa-play text-[10px]"></i> [${activeScenario.timestamp}]</button>
+                    </div>
+                    <p class="text-base sm:text-lg font-bold text-white leading-relaxed">${activeScenario.situation[currentLang]}</p>
+                </div>
+
+                <div class="space-y-3">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-400">${currentLang === 'ar' ? 'اختر ردك ومرره على فلتر الكلمات:' : 'Select your response to test it through the Word Filter:'}</p>
+                    <div class="grid grid-cols-1 gap-3">
+                        ${activeScenario.options.map((opt, oIdx) => {
+                            const isSelected = selectedScenarioOption === oIdx;
+                            return `
+                                <button onclick="chooseScenarioOption(${oIdx})" class="text-start p-4 rounded-2xl border transition flex items-start gap-3.5 ${isSelected ? 'bg-brand-600/25 border-brand-400 text-white shadow-md' : 'bg-slate-800/60 hover:bg-slate-700/70 border-slate-700 text-slate-200'}">
+                                    <div class="w-6 h-6 rounded-full border-2 ${isSelected ? 'border-brand-400 bg-brand-500 text-white' : 'border-slate-500'} flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                                        ${oIdx + 1}
+                                    </div>
+                                    <span class="text-sm sm:text-base font-medium leading-snug">${opt.text[currentLang]}</span>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                ${feedbackHtml}
+            `;
+        }
+
+        // --- SELF-ASSESSMENT LOGIC [00:03:35] ---
+        function setAssessmentScore(qIdx, val) {
+            assessmentScores[qIdx] = val;
+            renderAssessment();
+        }
+
+        function renderAssessment() {
+            const qContainer = document.getElementById('assessment-questions');
+            qContainer.innerHTML = assessmentData.map((item, idx) => {
+                const currentVal = assessmentScores[idx];
+                return `
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <h4 class="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">${item.title[currentLang]}</h4>
+                            <span class="px-2.5 py-0.5 rounded-lg text-xs font-black bg-brand-500/15 text-brand-600 dark:text-brand-400">${currentVal} / 5</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">${item.question[currentLang]}</p>
+                        <div class="grid grid-cols-5 gap-2 pt-1">
+                            ${[1, 2, 3, 4, 5].map(num => `
+                                <button onclick="setAssessmentScore(${idx}, ${num})" class="py-2 rounded-xl font-bold text-xs sm:text-sm border transition ${currentVal === num ? 'bg-brand-600 text-white border-brand-600 shadow-sm' : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-brand-400'}">
+                                    ${num}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const total = assessmentScores.reduce((a, b) => a + b, 0);
+            const pct = Math.round((total / 25) * 100);
+            document.getElementById('assess-total-pct').textContent = `${pct}%`;
+
+            const badgeLevel = document.getElementById('assess-badge-level');
+            const adviceBox = document.getElementById('assess-advice');
+
+            if (pct >= 85) {
+                badgeLevel.textContent = currentLang === 'ar' ? '🌟 متمكن في فن التعامل والذكاء الأخلاقي' : '🌟 Master of Relationship Art & Empathy';
+                adviceBox.innerHTML = currentLang === 'ar'
+                    ? '<strong>تحليل الفيديو [00:03:35]:</strong> لديك وعي عالٍ جداً بتأثير كلماتك ومشاعرك على الآخرين. استمر في الحفاظ على معادلة التوازن (لين + حزم) وشارك هذا الأثر الطيب مع من حولك.'
+                    : '<strong>Video Insight [00:03:35]:</strong> You have exceptional awareness of how your words and presence impact others. Keep nurturing your Golden Balance!';
+            } else if (pct >= 65) {
+                badgeLevel.textContent = currentLang === 'ar' ? '🌱 واعٍ وفي طريق التطور المستمر' : '🌱 Mindful & Steadily Growing';
+                adviceBox.innerHTML = currentLang === 'ar'
+                    ? '<strong>تحليل الفيديو [00:03:35]:</strong> تمتلك أساساً طيباً، وتحتاج فقط لتطبيق «فلتر الكلمات» لحظة الغضب أو الاختلاف. تذكر أن الأخلاق مهارة تزداد رسوخاً بالتدريب اليومي.'
+                    : '<strong>Video Insight [00:03:35]:</strong> You have a strong foundation! Focus on applying the Word Filter during moments of stress or disagreement.';
+            } else {
+                badgeLevel.textContent = currentLang === 'ar' ? '🧭 بداية رحلة اكتساب المهارة' : '🧭 Starting the Skill-Building Journey';
+                adviceBox.innerHTML = currentLang === 'ar'
+                    ? '<strong>تحليل الفيديو [00:00:50]:</strong> الخبر السار في الفيديو هو أن الأخلاق وحسن التعامل ليست صفة تولد بها فقط، بل مهارة تُكتسب! ابدأ اليوم بمهارة واحدة مثل الاستماع دون مقاطعة.'
+                    : '<strong>Video Insight [00:00:50]:</strong> The great news is that dealing with people is an acquired skill! Start today with one micro-habit like active listening.';
+            }
+
+            // Render Bars
+            const barsContainer = document.getElementById('assess-bars');
+            barsContainer.innerHTML = assessmentData.map((item, idx) => {
+                const itemPct = (assessmentScores[idx] / 5) * 100;
+                return `
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-bold text-slate-600 dark:text-slate-400">
+                            <span class="truncate max-w-[220px]">${item.title[currentLang]}</span>
+                            <span>${itemPct}%</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand-500 rounded-full transition-all duration-300" style="width: ${itemPct}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- DAILY TRACKER LOGIC [00:03:51] ---
+        function toggleTrackerItem(idx) {
+            trackerChecked[idx] = !trackerChecked[idx];
+            renderTracker();
+            const completedCount = trackerChecked.filter(Boolean).length;
+            if (completedCount === trackerItemsData.length) {
+                showToast(i18n[currentLang].toast_completed);
+                triggerConfetti();
+            }
+        }
+
+        function resetTracker() {
+            trackerChecked = [false, false, false, false, false];
+            renderTracker();
+        }
+
+        function renderTracker() {
+            const listContainer = document.getElementById('tracker-list');
+            listContainer.innerHTML = trackerItemsData.map((item, idx) => {
+                const checked = trackerChecked[idx];
+                return `
+                    <div onclick="toggleTrackerItem(${idx})" class="cursor-pointer p-4 rounded-2xl border transition flex items-center gap-4 ${checked ? 'bg-brand-50/90 dark:bg-brand-950/40 border-brand-400 dark:border-brand-700' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 hover:border-brand-300'}">
+                        <div class="w-7 h-7 rounded-xl flex items-center justify-center border-2 transition shrink-0 ${checked ? 'bg-brand-500 border-brand-500 text-white' : 'bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-600'}">
+                            ${checked ? '<i class="fa-solid fa-check text-sm"></i>' : ''}
+                        </div>
+                        <span class="text-sm sm:text-base font-semibold ${checked ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-800 dark:text-slate-100'}">${item[currentLang]}</span>
+                    </div>
+                `;
+            }).join('');
+
+            const completed = trackerChecked.filter(Boolean).length;
+            const total = trackerItemsData.length;
+            const pct = Math.round((completed / total) * 100);
+            document.getElementById('tracker-progress-text').textContent = `${completed} / ${total} (${pct}%)`;
+            document.getElementById('tracker-progress-bar').style.width = `${pct}%`;
+        }
+
+        // --- COPY SUMMARY TO CLIPBOARD ---
+        function copySummary() {
+            const summaryText = currentLang === 'ar'
+                ? `🌟 خلاصة كتاب «فن التعامل واكتساب الأخلاق» (Abouawd Studio):\n1. الأخلاق مهارة تُكتسب بالتدريب اليومي [00:00:50].\n2. الناس مختلفون: الحساس يحتاج للتقدير، والعملي يحتاج للوضوح [00:01:10].\n3. الأخلاق = التوازن (لين + حزم): تكسب الشخص دون أن تخسر نفسك [00:01:52].\n4. المهارات الأربع: أسلوب كلامك، الاستماع الحقيقي، الاحترام عند الاختلاف، والتحكم في الغضب [00:02:27].\n5. القاعدة الذهبية: «الناس لا يتذكرون كلامك، بل يتذكرون شعورهم وهم معك» [00:04:19].\n✨ تصميم محمد عوض خير بمساعدة Gemini 4 Argon`
+                : `🌟 Summary of 'The Art of Dealing with People' (Abouawd Studio):\n1. Good character is an acquired skill built daily [00:00:50].\n2. People differ: Sensitive people need appreciation; Practical people need clarity [00:01:10].\n3. Ethics = Balance (Gentleness + Firmness): Win people without losing yourself [00:01:52].\n4. The 4 Skills: Word delivery, Active listening, Respect in disagreement, Anger control [00:02:27].\n5. Golden Rule: "People don't remember your words; they remember how they felt with you" [00:04:19].\n✨ تصميم محمد عوض خير بمساعدة Gemini 4 Argon`;
+
+            const tempArea = document.createElement('textarea');
+            tempArea.value = summaryText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+
+            showToast(i18n[currentLang].toast_copied);
+        }
+
+        // --- TOAST MESSAGE HELPER ---
+        function showToast(msg) {
+            const box = document.getElementById('toast-box');
+            const text = document.getElementById('toast-msg');
+            text.textContent = msg;
+            box.classList.remove('opacity-0', 'pointer-events-none');
+            box.classList.add('opacity-100');
+            setTimeout(() => {
+                box.classList.remove('opacity-100');
+                box.classList.add('opacity-0', 'pointer-events-none');
+            }, 3200);
+        }
+
+        // --- CONFETTI CELEBRATION ---
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            canvas.classList.remove('hidden');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = Array.from({ length: 70 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                size: Math.random() * 8 + 4,
+                color: ['#10b981', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6'][Math.floor(Math.random() * 5)],
+                speedY: Math.random() * 4 + 2,
+                speedX: (Math.random() - 0.5) * 3
+            }));
+
+            let frames = 0;
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                });
+                frames++;
+                if (frames < 140) {
+                    requestAnimationFrame(draw);
+                } else {
+                    canvas.classList.add('hidden');
+                }
+            }
+            draw();
+        }
+
+        // --- LANGUAGE SWITCHER ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const htmlEl = document.documentElement;
+            htmlEl.setAttribute('lang', currentLang);
+            htmlEl.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+
+            document.getElementById('lang-btn-text').textContent = currentLang === 'ar' ? 'English' : 'العربية';
+            document.getElementById('nav-title').textContent = i18n[currentLang].nav_title;
+            document.getElementById('nav-subtitle').textContent = i18n[currentLang].nav_subtitle;
+            document.getElementById('svg-left-txt').textContent = i18n[currentLang].svg_left;
+            document.getElementById('svg-right-txt').textContent = i18n[currentLang].svg_right;
+
+            // Show English credit alongside the mandatory Arabic credit when in English mode
+            const enCredit = document.getElementById('footer-en-credit');
+            if (currentLang === 'en') {
+                enCredit.classList.remove('hidden');
+            } else {
+                enCredit.classList.add('hidden');
+            }
+
+            // Translate all static data-i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.textContent = i18n[currentLang][key];
+                }
+            });
+
+            // Re-render all dynamic components
+            renderTimeline();
+            renderPersonalities();
+            updateBalance(currentBalanceValue);
+            renderSkills();
+            renderSimulator();
+            renderAssessment();
+            renderTracker();
+        }
+
+        // --- THEME SWITCHER (DARK / LIGHT MODE) ---
+        function toggleTheme() {
+            isDark = !isDark;
+            const htmlEl = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (isDark) {
+                htmlEl.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-lg';
+            } else {
+                htmlEl.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-lg';
+            }
+        }
+
+        // --- INITIALIZE ON LOAD ---
+        window.onload = function () {
+            renderTimeline();
+            renderPersonalities();
+            updateBalance(50);
+            renderSkills();
+            renderSimulator();
+            renderAssessment();
+            renderTracker();
+        };
+    </script>
+</body>
+</html>
